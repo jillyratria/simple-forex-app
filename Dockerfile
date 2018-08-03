@@ -4,8 +4,8 @@ ENV NPM_CONFIG_LOGLEVEL warn
 ARG app_env
 ENV NODE_ENV $app_env
 
-RUN mkdir -p /fe
-WORKDIR /fe
+RUN mkdir -p /simple-forex-app
+WORKDIR /simple-forex-app
 COPY ./ ./
 
 RUN npm install

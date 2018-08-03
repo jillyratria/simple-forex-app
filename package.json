@@ -2,6 +2,7 @@
   "name": "simple-forex-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://jillyratria.github.io/simple-forex-app",
   "dependencies": {
     "axios": "^0.18.0",
     "react": "^16.4.1",
