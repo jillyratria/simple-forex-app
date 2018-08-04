@@ -1,25 +1,19 @@
-FROM node
+FROM node:9
 
-ENV NPM_CONFIG_LOGLEVEL warn
-ARG app_env
-ENV NODE_ENV $app_env
+# Create app directory
+WORKDIR ~/Documents
 
-RUN mkdir -p /simple-forex-app
-WORKDIR /simple-forex-app
-COPY ./ ./
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package*.json ./
 
 RUN npm install
+# If you are building your code for production
+# RUN npm install --only=production
 
-# if dev settings will use create-react start script for hot code relaoding via docker-compose shared volume
-# if production setting will build optimized static files and serve using http-server
-CMD if [ ${NODE_ENV} = production ]; \
-	then \
-	npm install -g http-server && \
-	npm run build && \
-	cd build && \
-	hs -p 3000; \
-	else \
-	npm run start; \
-	fi
+# Bundle app source
+COPY . .
 
 EXPOSE 3000
+CMD [ "npm", "start" ]
